@@ -1,3 +1,4 @@
+# -*- coding = utf-8 -*-
 import sys
 import fileinput
 
@@ -182,10 +183,31 @@ def cnf(s):
     s = removeDuplicateLiterals(s)
     s = removeDuplicateClauses(s)
     return s
+    
+def standardize(cnf):#This par is aimed to modify the input cnf format list into the program readable list,especially for singel clauses and literals.
+    if type(cnf) is str or cnf[0] == "not": # must be a single literal (positive or negative)
+        return ["and", ["or", cnf]]
+    if cnf[0] == "or": # add 'and' in front of single clauses
+        return ["and", cnf]
+    result = ["and"]
+    for clause in cnf[1:]:#skip and
+         if type(clause) == str:
+              result.append(["or", clause])
+         elif clause[0] == "not":
+              result.append(["or", clause])
+         else:
+              result.append(clause)
+    #print result
+    return result
+
 
 if __name__ == "__main__":
 
     sentences = fileinput.input()
+    #print sentences[0]
     for l in sentences:
-        print repr(cnf(eval(l.strip())))
+         l_cnf = repr(cnf(eval(l.strip())))
+         inputClauses=eval(l_cnf.strip())
+         standardinputClauses=standardize(inputClauses)
+         print standardinputClauses
 

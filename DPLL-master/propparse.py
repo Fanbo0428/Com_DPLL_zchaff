@@ -38,12 +38,9 @@ def atom(token):
         try: return float(token)
         except ValueError:
             return token
-    
-# command line interface (for testing)
-# > python propparse.py < tests.lisp
+
 if __name__ == "__main__":
     intext = "".join(fileinput.input())
     outlist = parse(intext)
-    #print repr(outtext)
     for l in outlist:
         print repr(l)

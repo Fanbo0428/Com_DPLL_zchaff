@@ -1,24 +1,29 @@
 
-;; Test input for propply.py
-
-; 1
-(if (and (not R) B) W)
-
-; 2
-(not (if (if (or P (not Q)) R) (and P R)))
-
-; 3
-(and (not (if not P Q)) (if not R P))
-
-; 4
-(not (not (not (not (not P)))))
-
-; 5
+; simple test
 (and A A B C)
 
-; 6
-(and P (not P))
+; 
+(not (if (if (or P (not Q)) R) (and P R)) (and P (not P) Q R (not P)))
 
-; 7
-(and (if P Q) (and P (not Q)))
+; 
+(or (not (if P Q)) (if R P) (if (and (not R) B) W))
+
+; test for some complicated
+(and A (not B) C (not D) (not (if (if (or C (not B)) A) (and D C))) (or (not (if B A)) (if C D) (if (and (not D) B) C)))
+
+;
+(and (if (and (not R) B) W) (or (not (if W B)) (if R W) (if (and (not R) B) W)))
+
+; 
+(and P (not P) A B (not A))
+
+; 
+(and (if P Q) (and P (not Q)) (not (if (iff (or P (not Q)) R) (and P R))))
+
+; test for nested
+(not (not (not (not (not P)))))
+
+; test for another notation style
+(and aa bb)
+
 
